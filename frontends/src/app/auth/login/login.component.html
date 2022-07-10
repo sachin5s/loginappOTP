@@ -1,0 +1,50 @@
+<div *ngIf="!varifyOTP">
+<div *ngIf="!isNumberMode">
+<h1 style="box-shadow: 6px 6px rgb(170, 170, 170); padding: 20px; font-size: 30px; font-weight:bold;background-color: rgb(53, 249, 151);" >BFSI EDGE</h1>
+<mat-card>
+    <h3 *ngIf="errorMessage" class="errormessage">{{message}}</h3> 
+    <h3 *ngIf="succesMessage" class="succesMessage">{{message}}</h3> 
+<form [formGroup]="loginFormData" (ngSubmit)="onSubmit()">
+<mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" placeholder="abc@gmail.com" type="email" required>
+</mat-form-field><br>
+<mat-form-field>
+    <mat-label >Password</mat-label>
+    <input matInput type="password" formControlName="password" required>
+</mat-form-field>
+    <button mat-raised-button color="accent" type="submit" [disabled]="!loginFormData.valid">Login</button>
+</form>      
+<p style=" margin: 5px 0px 0px 10px;"><i>Don't have an account? <a routerLink="/signup">singup</a></i></p>
+<h4 style="font-weight: bold; margin: 5px 0px 0px 100px;"><i>Login With Mobile Number <button type="button" style="margin-left: 10px;" mat-stroked-button color="warn" (click)="changeMobileMode()">Click here</button></i></h4>
+</mat-card>
+</div>
+
+<div *ngIf="isNumberMode">
+    <mat-card>
+        <h3 *ngIf="errorMessage" class="errormessage">{{message}}</h3> 
+        <h3 *ngIf="succesMessage" class="succesMessage">{{message}}</h3> 
+<form [formGroup]="mobileFormData" (ngSubmit)="onNumberSubmit()">
+    <mat-form-field>
+        <mat-label>Registered Mobile Number</mat-label>
+        <input type="tel" formControlName="mobileNumber" matInput required placeholder="9876543210">
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit" [disabled]="!mobileFormData.valid">Get OTP</button>
+    </form>
+</mat-card>
+</div>
+</div>
+
+<div *ngIf="varifyOTP" >
+    <mat-card>
+        <h3 *ngIf="errorMessage" class="errormessage">{{message}}</h3> 
+        <h3 *ngIf="succesMessage" class="succesMessage">{{message}}</h3> 
+<form [formGroup]="varifyOTPformData" (ngSubmit)="onVarifyOTP()">
+    <mat-form-field>
+        <mat-label>Enter OTP</mat-label>
+        <input type="number" formControlName="code" matInput required>
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit" [disabled]="!varifyOTPformData.valid">submit OTP</button>
+    </form>
+</mat-card>
+</div>
